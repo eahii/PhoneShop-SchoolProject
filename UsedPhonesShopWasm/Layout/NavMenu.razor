@@ -1,0 +1,51 @@
+﻿<div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <!-- Sivuston nimi/navigointipalkin otsikko -->
+        <a class="navbar-brand" href="">UsedPhonesShopWasm</a>
+        <!-- Painike, jolla voidaan avata tai sulkea navigointivalikko pienissä näytöissä -->
+        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</div>
+
+<!-- Navigointivalikko, joka voi avautua tai sulkeutua riippuen collapseNavMenu-arvosta -->
+<div class="@NavMenuCssClass nav-scrollable">
+    <nav class="flex-column">
+        <ul>
+            <!-- Linkki kotisivulle -->
+            <li class="nav-item px-3">
+                <!-- NavLink valitsee aktiivisen tyylin, kun käyttäjä on tällä sivulla -->
+                <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                    <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
+                </NavLink>
+            </li>
+            <!-- Linkki kirjautumissivulle -->
+            <li class="nav-item px-3">
+                <NavLink class="nav-link" href="/login">
+                    <span class="oi oi-account-login" aria-hidden="true"></span> Login
+                </NavLink>
+            </li>
+            <!-- Linkki asetussivulle -->
+            <li class="nav-item px-3">
+                <NavLink class="nav-link" href="/settings">
+                    <span class="oi oi-cog" aria-hidden="true"></span> Settings
+                </NavLink>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+@code {
+    // Bool-arvo, joka määrittää, onko navigointivalikko suljettu vai avoin
+    private bool collapseNavMenu = true;
+
+    // Määrittää, käytetäänkö "collapse"-CSS-luokkaa navigointivalikon tilan mukaan
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    // Funktio, joka vaihtaa navigointivalikon tilaa (suljettu/avoin)
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+}

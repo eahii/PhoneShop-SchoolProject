@@ -1,0 +1,54 @@
+@page "/login"
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@using UsedPhonesShop.Shared
+
+<h3>Login</h3>
+
+<!-- EditForm käsittelee käyttäjän syöttämät tiedot -->
+<EditForm Model="@loginModel" OnValidSubmit="@HandleLogin">
+    <!-- DataAnnotationsValidator varmistaa, että mallin validointi suoritetaan Data Annotations -attribuuttien perusteella -->
+    <DataAnnotationsValidator />
+    <!-- ValidationSummary näyttää mahdolliset validointivirheet -->
+    <ValidationSummary />
+
+    <!-- Syötekenttä käyttäjän sähköpostille -->
+    <div class="form-group">
+        <label>Email</label>
+        <!-- InputText-komponentti, joka on sidottu LoginModelin Email-kenttään -->
+        <InputText @bind-Value="loginModel.Email" class="form-control" />
+    </div>
+
+    <!-- Syötekenttä käyttäjän salasanalle -->
+    <div class="form-group">
+        <label>Password</label>
+        <!-- InputText-komponentti, joka on sidottu LoginModelin Password-kenttään (tyyppi: salasana) -->
+        <InputText @bind-Value="loginModel.Password" type="password" class="form-control" />
+    </div>
+
+    <!-- Lähetä-painike kirjautumisen käsittelyyn -->
+    <button type="submit" class="btn btn-primary">Login</button>
+</EditForm>
+
+@code {
+// Malli, johon käyttäjän antamat kirjautumistiedot tallennetaan
+private LoginModel loginModel = new LoginModel();
+
+// Metodi, joka käsittelee kirjautumisen
+private async Task HandleLogin()
+{
+// Lähetetään HTTP POST -pyyntö API:lle kirjautumistietojen kanssa
+var response = await Http.PostAsJsonAsync("api/Account/login", loginModel);
+
+if (response.IsSuccessStatusCode)
+{
+// Jos kirjautuminen onnistuu, siirrytään etusivulle
+Navigation.NavigateTo("/");
+}
+else
+{
+// Jos kirjautuminen epäonnistuu, näytetään virheilmoitus
+Console.WriteLine("Invalid login attempt");
+}
+}
+}

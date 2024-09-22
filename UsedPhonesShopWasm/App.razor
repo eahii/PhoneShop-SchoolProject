@@ -1,0 +1,23 @@
+﻿<Router AppAssembly="@typeof(App).Assembly">
+    <!-- Router-komponentti vastaa reitityksestä Blazor-sovelluksessa. 
+         Tässä määritellään, että sovelluksen kokoonpano käyttää tätä assemblyä (App). -->
+    
+    <Found Context="routeData">
+        <!-- Tämä osa määrittää, mitä näytetään, kun URL-reitti löytyy (on määritelty sovelluksessa). -->
+        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+        <!-- RouteView-komponentti renderöi oikean komponentin vastaamaan pyydettyä reittiä.
+             DefaultLayout määrittelee, että käytetään MainLayout-ulkosuunnitelmaa kaikille sivuille. -->
+        <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+        <!-- FocusOnNavigate-komponentti siirtää fokuksen h1-elementtiin aina, kun reitti muuttuu,
+             mikä parantaa saavutettavuutta ja navigointikokemusta. -->
+    </Found>
+
+    <NotFound>
+        <!-- Tämä osa määrittää, mitä näytetään, jos reittiä ei löydy. -->
+        <LayoutView Layout="@typeof(MainLayout)">
+            <!-- LayoutView asettaa MainLayout-ulkosuunnitelman myös tälle virhesivulle. -->
+            <p>Sorry, there's nothing at this address.</p>
+            <!-- Näytetään viesti, jos reittiä ei löydy. -->
+        </LayoutView>
+    </NotFound>
+</Router>

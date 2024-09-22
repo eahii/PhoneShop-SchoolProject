@@ -1,0 +1,28 @@
+@page "/settings"
+@using Microsoft.AspNetCore.Components
+@inject IJSRuntime JSRuntime
+
+<h3>Settings</h3>
+
+<div class="toggle-switch">
+    <input type="checkbox" id="darkModeToggle" @bind="isDarkMode" @bind:after="OnThemeChanged" />
+    <label for="darkModeToggle" class="switch"></label>
+    <span>@(isDarkMode ? "Dark Mode" : "Light Mode")</span>
+</div>
+
+@code {
+    private bool isDarkMode;
+
+    protected override void OnInitialized()
+    {
+        // Load the initial theme setting from local storage or default to light mode
+        isDarkMode = false; // Replace with actual loading logic if needed
+    }
+
+    private async void OnThemeChanged()
+    {
+        Console.WriteLine("OnThemeChanged called with isDarkMode: " + isDarkMode);
+        // Save the theme setting to local storage or apply it directly
+        await JSRuntime.InvokeVoidAsync("applyTheme", isDarkMode);
+    }
+}

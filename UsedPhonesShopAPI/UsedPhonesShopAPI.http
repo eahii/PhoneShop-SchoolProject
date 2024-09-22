@@ -1,0 +1,6 @@
+@UsedPhonesShopAPI_HostAddress = http://localhost:5028
+
+GET {{UsedPhonesShopAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

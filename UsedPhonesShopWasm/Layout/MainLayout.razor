@@ -1,0 +1,23 @@
+﻿@inherits LayoutComponentBase
+<div class="page">
+    <!-- Sivun pääelementti, joka sisältää kaiken sisällön -->
+    
+    <div class="sidebar">
+        <!-- Sivupalkki, johon sisällytetään navigointivalikko (NavMenu-komponentti) -->
+        <NavMenu />
+    </div>
+
+    <main>
+        <!-- Pääsisältöalue -->
+        
+        <div class="top-row px-4">
+            <!-- Yläosassa oleva rivi, joka sisältää linkin ulkoiseen resurssiin -->
+            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+        </div>
+
+        <article class="content px-4">
+            <!-- Tähän kohtaan Blazor renderöi lapsikomponenttien sisällön -->
+            @Body
+        </article>
+    </main>
+</div>
